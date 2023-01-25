@@ -20,3 +20,9 @@ Copy the files to the respective locations according to the paths listed below:
 /usr/lib/udev/hwdb.d/61-eve-sensor.hwdb
 
 /usr/lib/udev/hwdb.d/61-eve-keyboard.hwdb
+
+
+After installation of the files run
+systemd-hwdb update
+
+This will update th hwdb to allow the accelerometer and keyboard to work correctly
