@@ -1,7 +1,8 @@
 Installing ALSA drivers and configuration files for the Pixelbook (Eve) Under Linux:
 
 Copy the files to the respective locations according to the paths listed below:
-/mnt/lib/firmware/9d71-GOOGLE-EVEMAX-0-tplg.bin
+
+/lib/firmware/9d71-GOOGLE-EVEMAX-0-tplg.bin
 
 /lib/firmware/dsp_lib_dsm_core_spt_release.bin
 
