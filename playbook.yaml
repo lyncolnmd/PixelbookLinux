@@ -25,16 +25,16 @@
         }
       - { source: "dsmparam.bin", dest: "/opt/google/dsm/dsmparam.bin" }
       - {
-          source: "Hifi.conf",
-          dest: "/usr/share/alsa/ucm2/Intel/kbl-r5514-5663-/Hifi.conf",
+          source: "HiFi.conf",
+          dest: "/usr/share/alsa/ucm2/Intel/kbl-r5514-5663-/HiFi.conf",
         }
       - {
           source: "kbl-r5514-5663-.conf",
           dest: "/usr/share/alsa/ucm2/Intel/kbl-r5514-5663-/kbl-r5514-5663-.conf",
         }
       - {
-          source: "Hifi.conf",
-          dest: "/usr/share/alsa/ucm2/conf.d/kbl-r5514-5663-/Hifi.conf",
+          source: "HiFi.conf",
+          dest: "/usr/share/alsa/ucm2/conf.d/kbl-r5514-5663-/HiFi.conf",
         }
       - {
           source: "kbl-r5514-5663-.conf",
