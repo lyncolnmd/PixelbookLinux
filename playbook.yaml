@@ -1,0 +1,76 @@
+---
+- hosts: localhost
+  vars:
+    profile: all
+    folders:
+      - /lib/firmware/
+      - /lib/firmware/intel/
+      - /opt/google/dsm/
+      - /usr/share/alsa/ucm2/Intel/kbl-r5514-5663-/
+      - /usr/share/alsa/ucm2/conf.d/kbl-r5514-5663-/
+      - /usr/lib/udev/hwdb.d/
+
+    files:
+      - {
+          source: "9d71-GOOGLE-EVEMAX-0-tplg.bin",
+          dest: "/lib/firmware/9d71-GOOGLE-EVEMAX-0-tplg.bin",
+        }
+      - {
+          source: "dsp_lib_dsm_core_spt_release.bin",
+          dest: "/lib/firmware/dsp_lib_dsm_core_spt_release.bin",
+        }
+      - {
+          source: "dsp_fw_C75061F3-F2B2-4DCC-8F9F-82ABB4131E66.bin",
+          dest: "/lib/firmware/intel/dsp_fw_C75061F3-F2B2-4DCC-8F9F-82ABB4131E66.bin",
+        }
+      - { source: "dsmparam.bin", dest: "/opt/google/dsm/dsmparam.bin" }
+      - {
+          source: "Hifi.conf",
+          dest: "/usr/share/alsa/ucm2/Intel/kbl-r5514-5663-/Hifi.conf",
+        }
+      - {
+          source: "kbl-r5514-5663-.conf",
+          dest: "/usr/share/alsa/ucm2/Intel/kbl-r5514-5663-/kbl-r5514-5663-.conf",
+        }
+      - {
+          source: "Hifi.conf",
+          dest: "/usr/share/alsa/ucm2/conf.d/kbl-r5514-5663-/Hifi.conf",
+        }
+      - {
+          source: "kbl-r5514-5663-.conf",
+          dest: "/usr/share/alsa/ucm2/conf.d/kbl-r5514-5663-/kbl-r5514-5663-.conf",
+        }
+      - {
+          source: "61-eve-sensor.hwdb",
+          dest: "/usr/lib/udev/hwdb.d/61-eve-sensor.hwdb",
+        }
+      - {
+          source: "61-eve-keyboard.hwdb",
+          dest: "/usr/lib/udev/hwdb.d/61-eve-keyboard.hwdb",
+        }
+
+  tasks:
+    - name: Make folders where needed
+      become: true
+      file:
+        path: "{{folder}}"
+        state: directory
+        mode: "0755"
+      with_items: "{{ folders }}"
+      loop_control:
+        loop_var: folder
+
+    - name: Copy files
+      become: true
+      copy:
+        src: "{{file.source}}"
+        dest: "{{file.dest}}"
+        mode: "0644"
+      with_items: "{{ files }}"
+      loop_control:
+        loop_var: file
+
+    - name: Do hw update
+      become: true
+      shell: |
+        systemd-hwdb update
